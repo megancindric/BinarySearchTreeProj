@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Dynamic;
 
 namespace BinarySearchTree
 {
@@ -6,7 +7,17 @@ namespace BinarySearchTree
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            BSTree myTree = new BSTree();
+            myTree.AddNode(5);
+            myTree.AddNode(2);
+            myTree.AddNode(9);
+            myTree.AddNode(7);
+            myTree.AddNode(1);
+            myTree.AddNode(8);
+            myTree.AddNode(10);
+            Console.WriteLine(myTree.Search(7));
+            Console.WriteLine(myTree.Search(4));
+            Console.ReadLine();   
         }
     }
 }

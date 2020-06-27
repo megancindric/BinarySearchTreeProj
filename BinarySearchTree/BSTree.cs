@@ -11,44 +11,99 @@ namespace BinarySearchTree
         //ctor
         public BSTree()
         {
-
+            rootNode = null;
+            //Do we have to assign this here in order to have a "null" value to set?
         }
 
         //member methods
-        public void Add(Node nodeToAdd)
+        public void AddNode(int value)
         {
-            //Will be passing in an array of values to sort into a tree
+            Node nodeToAdd = new Node(value);
             if (rootNode == null)
             {
                 //current node will equal rootnode
                 rootNode = nodeToAdd;
             }
-            //Will then compare our current value (should we pass in as param?)
+            //Will then compare our current value to our value to add
             else
             {
-                if (nodeToAdd.Data > rootNode.Data)
-                {
-                    //Some logic to move us to the RIGHT child node of rootNode
-                        //If this is a null value (unassigned) then we will assign this node to this position
+                //Will have a current node, starting at our root
+                Node currentNode = rootNode;
+                //Want to have a "parent node" to ensure our nodes all nest within each other
+                //This will also have a LEFT and a RIGHT node (currently unassigned)
 
-                }
-                else if (nodeToAdd.Data < rootNode.Data)
+                //How to keep looping through this UNTIL the value is assigned to a null spot?
+                while (true)
                 {
-                    //Some logic to move us to LEFT child node of rootNode
-                        //If this is a null value (unassigned) then we will assign this node to this position
+                    if (value > currentNode.Data)
+                    {
+                        //Some logic to move us to the RIGHT child node of rootNode
+                        if (currentNode.rightChild == null)
+                        {
+                            currentNode.rightChild = nodeToAdd;
+                            return;
+                        }
+                        else
+                        {
+                            currentNode = currentNode.rightChild;
+                        }
+                    }
+                    else
+                    {
+                        if (currentNode.leftChild == null)
+                        {
+                            currentNode.leftChild = nodeToAdd;
+                            return;
+                        }
+                        else
+                        {
+                            currentNode = currentNode.leftChild;
+                        }
+
+                    }
                 }
+               
             }
             
         }
 
-        public void Search(int itemToSearch)
+        public bool Search(int itemToSearch)
         {
-            //Should return a bool of contains or does not contain said value
-            //Can run same comparison that Add runs - compares value to each node then chooses whether to go left or right down tree
-                //if current value == itemToSearch return true, otherwise...
-                    //If greater than current value, shift to right child node
-                    //If less than current value, shift to left child node
-                        //If we get to the end and have not found this value, return false
+                Node currentNode = rootNode;
+                while (true)
+                {
+                    if (itemToSearch > currentNode.Data)
+                    {
+                        if (currentNode.rightChild == null)
+                        {
+                            return false;
+                        }
+                        else if (currentNode.rightChild.Data == itemToSearch)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            currentNode = currentNode.rightChild;
+                        }
+                    }
+                    else
+                    {
+                        if (currentNode.leftChild == null)
+                        {
+                        return false;
+                        }
+                        else if (currentNode.leftChild.Data == itemToSearch)
+                        {
+                        return true;
+                        }
+                        else
+                        {
+                            currentNode = currentNode.leftChild;
+                        }
+
+                    }
+                }
         }
     }
 }
